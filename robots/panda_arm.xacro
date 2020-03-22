@@ -5,12 +5,33 @@
   <xacro:macro name="panda_arm" params="arm_id:='panda' description_pkg:='franka_description' connected_to:='' xyz:='0 0 0' rpy:='0 0 0' safety_distance:=0">
     <xacro:property name="joint_damping" value="1.0"/>
     <link name="world" />
+
+    <link name="wall">
+      <visual>
+        <origin xyz="-0.1 0 1.5" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.2 1 3" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="-0.1 0 1.5" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.2 1 3" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="dummy_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="world" />
+      <child link="wall" />
+    </joint>
+
     <xacro:unless value="${not connected_to}">
       <joint name="${arm_id}_joint_${connected_to}" type="fixed">
         <parent link="${connected_to}"/>
         <child link="${arm_id}_link0"/>
         <origin rpy="${rpy}" xyz="${xyz}"/>
-        <dynamics damping="${joint_damping}"/>
       </joint>
     </xacro:unless>
     <link name="${arm_id}_link0">
