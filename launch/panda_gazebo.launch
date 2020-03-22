@@ -4,6 +4,9 @@
   <arg name="gazebo_gui" default="true"/>
   <arg name="debug" default="false" />
   <arg name="pipeline" default="ompl" />
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="1.5708"/>
+  <arg name="yaw" default="0"/>
 
 
   <!-- startup simulated world -->
@@ -14,22 +17,28 @@
     <arg name="verbose" value="true"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="headless" value="false"/>
+
   </include>
 
   <!-- send robot urdf to param server -->
   <param name="robot_description" command="$(find xacro)/xacro '$(find franka_description)/robots/defined.urdf.xacro'"/>
 
   <!-- push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
-  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model panda -x 0 -y 0 -z 0 -J panda_joint1 0 -J panda_joint2 0 -J panda_joint3 0 -J panda_joint4 0 -J panda_joint5 0 -J panda_joint6 0 -J panda_joint7 0 "
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model panda -x 0 -y 0 -z 0.05 -J panda_joint1 0.3 -J panda_joint2 1 -J panda_joint3 1 -J panda_joint4 -1 -J panda_joint5 1 -J panda_joint6 2 -J panda_joint7 -0.5 "
     respawn="false" output="screen" />
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find franka_description)/robots/panda_control.yaml" command="load"/>
 
   <!-- Load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" 
-        args="joint_state_controller  
-          panda_arm_controller
-          --timeout 20"/>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/panda" args="joint_state_controller panda_arm_controller"/>
+ <!-- joint2_effort_controller joint3_effort_controller joint4_effort_controller joint5_effort_controller joint6_effort_controller joint7_effort_controller -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="false"/>
+    <rosparam param="source_list">[panda/joint_states]</rosparam>
+  </node>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
 
 </launch>

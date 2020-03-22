@@ -73,6 +73,11 @@
             <mu1>0.2</mu1>
             <mu2>0.2</mu2>
         </gazebo> -->
+        <gazebo>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+                <robotNamespace>/panda</robotNamespace>
+            </plugin>
+        </gazebo>
 
     </xacro:macro>
 

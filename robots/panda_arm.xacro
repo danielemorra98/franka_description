@@ -70,7 +70,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="2.34471" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint1" type="revolute">
@@ -109,7 +109,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="2.36414" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint2" type="revolute">
@@ -148,7 +148,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="2.38050" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint3" type="revolute">
@@ -187,7 +187,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="2.42754" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint4" type="revolute">
@@ -244,7 +244,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="3.49611" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint5" type="revolute">
@@ -283,7 +283,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="1.46736" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint6" type="revolute">
@@ -322,7 +322,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="0.45606" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint7" type="revolute">
@@ -356,7 +356,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.06" />
+        <mass value="0.001" />
       </inertial>
     </link>
     <joint name="${arm_id}_joint8" type="fixed">

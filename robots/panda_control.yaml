@@ -1,12 +1,15 @@
-#panda:                    #useful if you use a namespace for the robot
+panda:                    #useful if you use a namespace for the robot
     # Publish joint states
     joint_state_controller:
         type: joint_state_controller/JointStateController
         publish_rate: 50
 
+    ##Joint names
+    # joint_names: [panda_joint1, panda_joint2, panda_joint3, panda_joint4, panda_joint5, panda_joint6, panda_joint7]
+
     panda_arm_controller:
-        type: position_controllers/JointPositionController
-        joints:
+        type: effort_controllers/JointTrajectoryController
+        joints: 
             - panda_joint1
             - panda_joint2
             - panda_joint3
@@ -14,8 +17,7 @@
             - panda_joint5
             - panda_joint6
             - panda_joint7
-
-        gains:
+        gains: 
             panda_joint1: { p: 12000, d: 50, i: 0.0, i_clamp: 10000 }
             panda_joint2: { p: 30000, d: 100, i: 0.02, i_clamp: 10000 }
             panda_joint3: { p: 18000, d: 50, i: 0.01, i_clamp: 1 }
@@ -23,6 +25,63 @@
             panda_joint5: { p: 12000, d: 70, i: 0.01, i_clamp: 1 }
             panda_joint6: { p: 7000, d: 50, i: 0.01, i_clamp: 1 }
             panda_joint7: { p: 2000, d: 20, i: 0.0, i_clamp: 1 }
+            
+
+    # joint2_effort_controller:
+    #     type: effort_controllers/JointTrajectoryController
+    #     joints: 
+    #         - panda_joint2
+    #     gains: { p: 30000, d: 100, i: 0.02, i_clamp: 10000 }
+
+    # joint3_effort_controller:
+    #     type: effort_controllers/JointTrajectoryController
+    #     joints: 
+    #         - panda_joint3
+    #     gains: { p: 18000, d: 50, i: 0.01, i_clamp: 1 }
+
+    # joint4_effort_controller:
+    #     type: effort_controllers/JointTrajectoryController
+    #     joints: 
+    #         - panda_joint4
+    #     gains: { p: 18000, d: 70, i: 0.01, i_clamp: 10000 }
+
+    # joint5_effort_controller:
+    #     type: effort_controllers/JointTrajectoryController
+    #     joints: 
+    #         - panda_joint5
+    #     gains: { p: 12000, d: 70, i: 0.01, i_clamp: 1 }
+
+    # joint6_effort_controller:
+    #     type: effort_controllers/JointTrajectoryController
+    #     joints: 
+    #         - panda_joint6
+    #     gains: { p: 7000, d: 50, i: 0.01, i_clamp: 1 }
+
+    # joint7_effort_controller:
+    #     type: effort_controllers/JointTrajectoryController
+    #     joints: 
+    #         - panda_joint7
+    #     gains: { p: 2000, d: 20, i: 0.0, i_clamp: 1 }
+
+    # panda_arm_controller:
+    #     type: position_controllers/JointTrajectoryController
+    #     joints:
+            # - panda_joint1
+            # - panda_joint2
+            # - panda_joint3
+            # - panda_joint4
+            # - panda_joint5
+            # - panda_joint6
+            # - panda_joint7
+
+    #     gains:
+    #         panda_joint1: { p: 12000, d: 50, i: 0.0, i_clamp: 10000 }
+    #         panda_joint2: { p: 30000, d: 100, i: 0.02, i_clamp: 10000 }
+    #         panda_joint3: { p: 18000, d: 50, i: 0.01, i_clamp: 1 }
+    #         panda_joint4: { p: 18000, d: 70, i: 0.01, i_clamp: 10000 }
+    #         panda_joint5: { p: 12000, d: 70, i: 0.01, i_clamp: 1 }
+    #         panda_joint6: { p: 7000, d: 50, i: 0.01, i_clamp: 1 }
+    #         panda_joint7: { p: 2000, d: 20, i: 0.0, i_clamp: 1 }
 
         constraints:
             goal_time: 2.0
