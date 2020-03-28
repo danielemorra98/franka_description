@@ -24,7 +24,7 @@
   <param name="robot_description" command="$(find xacro)/xacro '$(find franka_description)/robots/defined.urdf.xacro'"/>
 
   <!-- push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model panda -x 0 -y 0 -z 0.05 -J panda_joint1 0.3 -J panda_joint2 1 -J panda_joint3 1 -J panda_joint4 -1 -J panda_joint5 1 -J panda_joint6 2 -J panda_joint7 -0.5 "
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model panda -x 0 -y 0 -z 0.1 -J panda_joint1 0.3 -J panda_joint2 1 -J panda_joint3 1 -J panda_joint4 -1 -J panda_joint5 1 -J panda_joint6 2 -J panda_joint7 -0.5 "
     respawn="false" output="screen" />
 
   <!-- Load joint controller configurations from YAML file to parameter server -->

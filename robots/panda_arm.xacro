@@ -1,18 +1,41 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
   <!-- safety_distance: Minimum safety distance in [m] by which the collision volumes are expanded and which is enforced during robot motions -->
-  <!-- arm_id: Namespace of the panda arm. Serves to differentiate between arms in case of multiple instances. -->
+  <!-- arm_id: Namespace of the paree.nda arm. Serves to differentiate between arms in case of multiple instances. -->
   <xacro:macro name="panda_arm" params="arm_id:='panda' description_pkg:='franka_description' connected_to:='' xyz:='0 0 0' rpy:='0 0 0' safety_distance:=0">
     <xacro:property name="joint_damping" value="1.0"/>
+
     <link name="world" />
+
+    <link name="wall">
+      <visual>
+        <origin xyz="-0.1 0 1.5" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.2 1 3"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="-0.1 0 1.5" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.2 1 3"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="dummy_joint" type="fixed">
+      <parent link="world" />
+      <child link="wall" />
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </joint>
+
     <xacro:unless value="${not connected_to}">
       <joint name="${arm_id}_joint_${connected_to}" type="fixed">
         <parent link="${connected_to}"/>
         <child link="${arm_id}_link0"/>
         <origin rpy="${rpy}" xyz="${xyz}"/>
-        <dynamics damping="${joint_damping}"/>
       </joint>
     </xacro:unless>
+
     <link name="${arm_id}_link0">
       <visual>
         <geometry>
@@ -43,6 +66,7 @@
         <mass value="3.06" />
       </inertial>
     </link>
+
     <link name="${arm_id}_link1">
       <visual>
         <geometry>
@@ -68,11 +92,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="2.34471" />
+        <origin xyz="0.0039 0.0021 0" rpy="0 0 0" />
+        <inertia ixx="0.703" ixy="-0.000139" ixz="0.00677" iyy="0.707" iyz="0.0192" izz="0.00912" />
+        <mass value="4.97" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint1" type="revolute">
       <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
       <origin rpy="0 0 0" xyz="0 0 0.333"/>
@@ -82,6 +107,7 @@
       <axis xyz="0 0 1"/>
       <limit effort="87" lower="-2.8973" upper="2.8973" velocity="2.1750"/>
     </joint>
+
     <link name="${arm_id}_link2">
       <visual>
         <geometry>
@@ -107,11 +133,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="2.36414" />
+        <origin xyz="-0.00314 -0.0287 0.0035" rpy="0 0 0" />
+        <inertia ixx="0.00796" ixy="-0.00393" ixz="0.0103" iyy="0.0281" iyz="0.0007" izz="0.026" />
+        <mass value="0.647" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint2" type="revolute">
       <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-1.7628" soft_upper_limit="1.7628"/>
       <origin rpy="${-pi/2} 0 0" xyz="0 0 0"/>
@@ -121,6 +148,7 @@
       <axis xyz="0 0 1"/>
       <limit effort="87" lower="-1.7628" upper="1.7628" velocity="2.1750"/>
     </joint>
+
     <link name="${arm_id}_link3">
       <visual>
         <geometry>
@@ -146,11 +174,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="2.38050" />
+        <origin xyz="0.0275 0.0393 -0.0665" rpy="0 0 0" />
+        <inertia ixx="0.0372" ixy="-0.00476" ixz="-0.0114" iyy="0.0362" iyz="-0.0128" izz="0.01083" />
+        <mass value="3.23" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint3" type="revolute">
       <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
       <origin rpy="${pi/2} 0 0" xyz="0 -0.316 0"/>
@@ -160,6 +189,7 @@
       <axis xyz="0 0 1"/>
       <limit effort="87" lower="-2.8973" upper="2.8973" velocity="2.1750"/>
     </joint>
+
     <link name="${arm_id}_link4">
       <visual>
         <geometry>
@@ -185,11 +215,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="2.42754" />
+        <origin xyz="-0.0532 0.1044 0.0275" rpy="0 0 0" />
+        <inertia ixx="0.0259" ixy="0.0078" ixz="0.00133" iyy="0.01955" iyz="0.00864" izz="0.0283" />
+        <mass value="3.59" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint4" type="revolute">
       <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-3.0718" soft_upper_limit="-0.0698"/>
       <origin rpy="${pi/2} 0 0" xyz="0.0825 0 0"/>
@@ -199,6 +230,7 @@
       <axis xyz="0 0 1"/>
       <limit effort="87" lower="-3.0718" upper="-0.0698" velocity="2.1750"/>
     </joint>
+
     <link name="${arm_id}_link5">
       <visual>
         <geometry>
@@ -242,11 +274,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="3.49611" />
+        <origin xyz="-0.012 0.0411 -0.0384" rpy="0 0 0" />
+        <inertia ixx="0.0355" ixy="-0.00212" ixz="-0.004037" iyy="0.0295" iyz="0.000229" izz="0.00863" />
+        <mass value="1.23" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint5" type="revolute">
       <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
       <origin rpy="${-pi/2} 0 0" xyz="-0.0825 0.384 0"/>
@@ -256,6 +289,7 @@
       <axis xyz="0 0 1"/>
       <limit effort="12" lower="-2.8973" upper="2.8973" velocity="2.6100"/>
     </joint>
+
     <link name="${arm_id}_link6">
       <visual>
         <geometry>
@@ -281,11 +315,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="1.46736" />
+        <origin xyz="0.0602 -0.01412 -0.01052" rpy="0 0 0" />
+        <inertia ixx="0.001964" ixy="0.000109" ixz="-0.001158" iyy="0.00435" iyz="0.000341" izz="0.00543" />
+        <mass value="1.67" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint6" type="revolute">
       <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-0.0175" soft_upper_limit="3.7525"/>
       <origin rpy="${pi/2} 0 0" xyz="0 0 0"/>
@@ -295,6 +330,7 @@
       <axis xyz="0 0 1"/>
       <limit effort="12" lower="-0.0175" upper="3.7525" velocity="2.6100"/>
     </joint>
+
     <link name="${arm_id}_link7">
       <visual>
         <geometry>
@@ -320,11 +356,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.3" />
-        <mass value="0.45606" />
+        <origin xyz="0.01052 -0.00425 0.0616" rpy="0 0 0" />
+        <inertia ixx="0.01252" ixy="-0.000428" ixz="-0.001196" iyy="0.01003" iyz="-0.000741" izz="0.00482" />
+        <mass value="0.736" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint7" type="revolute">
       <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
       <origin rpy="${pi/2} 0 0" xyz="0.088 0 0"/>
@@ -334,6 +371,7 @@
       <axis xyz="0 0 1"/>
       <limit effort="12" lower="-2.8973" upper="2.8973" velocity="2.6100"/>
     </joint>
+
     <link name="${arm_id}_link8">
       <collision>
         <origin xyz="0.0424 0.0424 -0.0250" rpy="${pi} ${pi/2} ${pi/2}"/>
@@ -359,10 +397,13 @@
         <mass value="0.001" />
       </inertial>
     </link>
+
     <joint name="${arm_id}_joint8" type="fixed">
       <origin rpy="0 0 0" xyz="0 0 0.107"/>
       <parent link="${arm_id}_link7"/>
       <child link="${arm_id}_link8"/>
     </joint>
+
   </xacro:macro>
+
 </robot>

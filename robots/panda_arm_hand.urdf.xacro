@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
+
   <xacro:include filename="$(find franka_description)/robots/panda_arm.xacro"/>
   <!-- <xacro:include filename="$(find franka_description)/robots/hand.xacro"/> -->
 
-  <xacro:panda_arm arm_id="panda" xyz="0 0 0" safety_distance="0.03" connected_to="world"/>
+  <xacro:panda_arm arm_id="panda" xyz="0 0 1.5" rpy="0 1.5708 0" safety_distance="0" connected_to="wall"/>
   <!-- <xacro:hand ns="panda" connected_to="panda_link8" /> -->
 
 </robot>
